@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year! - Waiting...</title>
+    <style>
+        /* --- General Styling and Background --- */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #FFC0CB; /* Soft Pink Background */
+            color: #4B0082; /* Deep Violet text for contrast */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden; 
+            text-align: center;
+        }
+
+        /* --- Countdown Styling --- */
+        #countdown {
+            font-size: 4em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7);
+        }
+        
+        /* --- Next Button Styling --- */
+        #nextButton {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: white;
+            background-color: #FF69B4; 
+            border: none;
+            border-radius: 25px;
+            cursor: not-allowed; 
+            transition: background-color 0.3s, transform 0.3s;
+            opacity: 0.5; 
+        }
+        
+        #nextButton.enabled {
+            background-color: #008000; 
+            cursor: pointer;
+            opacity: 1;
+        }
+
+        #nextButton:hover.enabled {
+            background-color: #006400;
+            transform: scale(1.05);
+        }
+
+        /* --- Hello Kitty Image Styling --- */
+        #kittyImage {
+            width: 150px;
+            height: auto;
+            margin-top: 30px;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
+        }
+
+        /* --- Falling Hearts Effect (CSS Animation) --- */
+        .heart {
+            position: absolute;
+            top: -10vh; 
+            color: #FF1493; 
+            font-size: 1.5em;
+            pointer-events: none; 
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Counting Down to the New Year! 🥳</h1>
+    
+    <div id="countdown">Loading...</div>
+    
+    <button id="nextButton" disabled onclick="goToNextPage()">Next Page! ✨</button>
+
+    <img id="kittyImage" src="hello_kitty.png" alt="Cute Hello Kitty" title="Happy New Year!">
+
+    <script>
+        // NOTE: Set the correct New Year's date here (e.g., Jan 1, 2027)
+        const newYearDate = new Date("Jan 1, 2026 00:00:00").getTime();
+        const countdownDisplay = document.getElementById("countdown");
+        const nextButton = document.getElementById("nextButton");
+
+        const updateCountdown = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = newYearDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            countdownDisplay.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+            if (distance < 0) {
+                clearInterval(updateCountdown);
+                countdownDisplay.innerHTML = "🎉 HAPPY NEW YEAR! 🎉";
+                
+                nextButton.disabled = false;
+                nextButton.classList.add('enabled');
+            }
+        }, 1000);
+        
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '💖'; 
+            heart.style.left = Math.random() * 100 + 'vw'; 
+            heart.style.animationDuration = Math.random() * 2 + 3 + 's'; 
+            heart.style.opacity = Math.random();
+            heart.style.fontSize = Math.random() * 1.5 + 1 + 'em'; 
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 5000); 
+        }
+
+        setInterval(createHeart, 200);
+
+        function goToNextPage() {
+            if (!nextButton.disabled) {
+                // This links to the next file we will create!
+                window.location.href = 'page2.html'; 
+            }
+        }
+
+    </script>
+</body>
+</html>
