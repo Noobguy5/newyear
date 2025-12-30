@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 4: Bonus Surprises!</title>
+    <style>
+        /* --- General Styling and Background --- */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #FFC0CB; /* Soft Pink Background */
+            color: #4B0082; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+            overflow: hidden; /* Important for the falling heart animation */
+        }
+
+        h1 {
+            color: #FF69B4; /* Hot Pink */
+            margin-bottom: 50px;
+            font-size: 2.5em;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            z-index: 10; /* Ensure text is above the hearts */
+        }
+
+        .image-link-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns for 3 image links */
+            gap: 40px;
+            z-index: 10; /* Ensure grid is above the hearts */
+        }
+
+        .link-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .link-item:hover {
+            transform: scale(1.1);
+        }
+
+        .link-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%; /* Make the images circular */
+            object-fit: cover;
+            border: 8px solid #48D1CC; /* Medium Turquoise Border */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            margin-bottom: 15px;
+        }
+
+        .link-label {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #4B0082;
+        }
+
+        /* Final Button to go back to the main surprise */
+        #goBackButton {
+            margin-top: 50px;
+            padding: 10px 20px;
+            font-size: 1.1em;
+            background-color: #FFD700;
+            color: #4B0082;
+            border: 2px solid #4B0082;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            z-index: 10; /* Ensure button is above the hearts */
+        }
+        
+        /* --- Falling Heart Effect (CSS Animation) --- */
+        .heart {
+            position: absolute;
+            top: -10vh; 
+            color: #FF1493; /* Deep Pink Hearts */
+            font-size: 2em;
+            pointer-events: none; 
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Pick one of the bonus surprises below!</h1>
+
+    <div class="image-link-grid">
+        <a class="link-item" href="page5.html">
+            <img class="link-image" src="image1.png" alt="First Surprise Image">
+            <span class="link-label">The First Surprise</span>
+        </a>
+
+        <a class="link-item" href="page6.html">
+            <img class="link-image" src="image2.png" alt="Second Surprise Image">
+            <span class="link-label">The Second Surprise</span>
+        </a>
+
+        <a class="link-item" href="page7.html">
+            <img class="link-image" src="image3.png" alt="Third Surprise Image">
+            <span class="link-label">The Third Surprise</span>
+        </a>
+    </div>
+
+    <a id="goBackButton" href="page3.html">Go Back to the Happy New Year Page</a>
+    
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '💖'; // Heart emoji
+            
+            // Randomize position, duration, and size for variety
+            heart.style.left = Math.random() * 100 + 'vw'; 
+            heart.style.animationDuration = Math.random() * 3 + 4 + 's'; // 4 to 7 seconds
+            heart.style.opacity = Math.random() * 0.7 + 0.3; // 30% to 100% opacity
+            heart.style.fontSize = Math.random() * 1.5 + 1.5 + 'em'; // 1.5em to 3em size
+            
+            document.body.appendChild(heart);
+            
+            // Remove the heart element after it falls off screen
+            setTimeout(() => {
+                heart.remove();
+            }, 7000); 
+        }
+
+        // Generate a new heart every 400 milliseconds
+        setInterval(createHeart, 400); 
+    </script>
+
+</body>
+</html>

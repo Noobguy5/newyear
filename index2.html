@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 2: A Surprise!</title>
+    <style>
+        /* --- General Styling and Background --- */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #FFC0CB; /* Soft Pink Background */
+            color: #4B0082; /* Deep Violet text */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+            overflow: hidden; 
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7);
+        }
+
+        /* --- Button Container --- */
+        .button-container {
+            display: flex;
+            gap: 40px;
+        }
+
+        /* --- Button Base Style (Dark Pink Background for both) --- */
+        .button {
+            padding: 20px 40px;
+            font-size: 1.5em;
+            font-weight: bold;
+            border: 3px solid #FF69B4; 
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            background-color: #C71585; /* Dark Pink */
+            color: white; 
+        }
+
+        .button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        /* --- Falling Heart Effect (CSS Animation) --- */
+        .heart {
+            position: absolute;
+            top: -10vh; 
+            color: #FF1493; 
+            font-size: 2em;
+            pointer-events: none; 
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>I have a surprise for you!</h1>
+    
+    <div class="button-container">
+        <button id="yesButton" class="button" onclick="window.location.href='page3.html'">
+            YES! I want the surprise!
+        </button>
+        
+        <button id="noButton" class="button" onclick="window.location.href='no.html'">
+            NO! I don't want a surprise.
+        </button>
+    </div>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '💖'; 
+            heart.style.left = Math.random() * 100 + 'vw'; 
+            heart.style.animationDuration = Math.random() * 3 + 4 + 's'; 
+            heart.style.opacity = Math.random() * 0.7 + 0.3; 
+            heart.style.fontSize = Math.random() * 1.5 + 1.5 + 'em'; 
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 7000); 
+        }
+        setInterval(createHeart, 400); 
+    </script>
+
+</body>
+</html>

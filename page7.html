@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonus Surprise 3: Your Song</title>
+    <style>
+        /* --- General Styling and Background --- */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #FFC0CB; /* Soft Pink Background */
+            color: #4B0082; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            overflow: auto; 
+            position: relative; 
+        }
+
+        h1 {
+            color: #FF69B4; 
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        /* --- Message Box Style --- */
+        .message-box {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            width: 80%;
+            max-width: 500px;
+            border: 5px solid #FFD700;
+            z-index: 10;
+            margin-bottom: 30px;
+        }
+        
+        .message-box p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #C71585;
+            font-style: italic;
+        }
+        
+        /* --- Video Container --- */
+        #video-container {
+            /* Position the video player off-screen */
+            position: absolute;
+            left: -9999px;
+            top: -9999px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            pointer-events: none; /* Ensure no interaction */
+        }
+        
+        /* --- Play Button Style (Visible only if needed) --- */
+        #playMusicButton {
+            background-color: #FFA07A; /* Light Salmon */
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 25px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            z-index: 15; /* Ensure it's above everything */
+            display: none; /* Starts hidden, revealed by JS if autoplay fails */
+        }
+        #playMusicButton:hover {
+            background-color: #FF7F50; /* Coral */
+        }
+
+
+        /* --- Button back to the image selection --- */
+        #backButton {
+            padding: 15px 30px;
+            font-size: 1.1em;
+            background-color: #90EE90;
+            color: #4B0082;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            z-index: 10;
+            margin-top: 20px;
+        }
+        #backButton:hover {
+            background-color: #7CFC00;
+        }
+        
+        /* --- Falling Heart Effect (CSS Animation) --- */
+        .heart {
+            position: absolute;
+            top: -10vh; 
+            color: #FF1493;
+            font-size: 2em;
+            pointer-events: none; 
+            animation: fall linear infinite;
+            z-index: 1; 
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🎧 Bonus Surprise 3: Your Song! 🎵</h1>
+    
+    <div id="video-container">
+        <video id="audioVideo" autoplay loop playsinline>
+            <source src="final_song.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div class="message-box">
+        <p>
+            This song always reminds me of you and our friendship. I hope it brings a smile to your face as we move into the new year. 
+        </p>
+        <p>
+            You have now found all three of your bonus surprises! It's just a small token to show how much I value you. Thank thanks for everything, my Penguin. Happy New Year! 🐻
+        </p>
+    </div>
+    
+    <button id="playMusicButton" onclick="forcePlay()">
+        Click Here to Start the Music! ▶️
+    </button>
+    
+    <button id="backButton" onclick="window.location.href='page4.html'">
+        Back to Bonus Surprises
+    </button>
+    
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '💖'; 
+            heart.style.left = Math.random() * 100 + 'vw'; 
+            heart.style.animationDuration = Math.random() * 3 + 4 + 's'; 
+            heart.style.opacity = Math.random() * 0.7 + 0.3; 
+            heart.style.fontSize = Math.random() * 1.5 + 1.5 + 'em'; 
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 7000); 
+        }
+        setInterval(createHeart, 400); 
+        
+        // Function to force playback when the button is clicked
+        function forcePlay() {
+            const video = document.getElementById('audioVideo');
+            const playButton = document.getElementById('playMusicButton');
+            
+            video.play().then(() => {
+                // If play succeeds, hide the button
+                playButton.style.display = 'none';
+            }).catch(error => {
+                // Should not happen on user click, but just in case
+                console.error("Playback failed even with user interaction:", error);
+            });
+        }
+
+        // Attempt to autoplay on page load
+        window.onload = function() {
+            const video = document.getElementById('audioVideo');
+            const playButton = document.getElementById('playMusicButton');
+            
+            if (video) {
+                video.play().catch(error => {
+                    // Autoplay was blocked (expected for audio). 
+                    // Reveal the button so the user can start it manually.
+                    playButton.style.display = 'block';
+                    console.log("Autoplay blocked. Button revealed for user interaction.");
+                });
+            }
+        };
+    </script>
+
+</body>
+</html>

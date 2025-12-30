@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonus Surprise 2: Camera Memories</title>
+    <style>
+        /* --- General Styling and Background --- */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #FFC0CB; /* Soft Pink Background */
+            color: #4B0082; /* Deep Violet text */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center main content vertically */
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            overflow: hidden; /* Hide overflow from absolutely positioned elements */
+            position: relative; /* Context for absolute positioning */
+        }
+
+        h1 {
+            color: #FF69B4; /* Hot Pink */
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+        
+        /* --- Main Edit Section: Center and Large --- */
+        .main-edit-container {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5); /* Stronger shadow for emphasis */
+            width: 90%;
+            max-width: 600px; /* Increased size for the main video/edit */
+            z-index: 10;
+        }
+        
+        .main-edit-video {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            border: 7px solid #FFD700; /* Thicker Gold frame */
+            display: block;
+        }
+        
+        .main-edit-caption {
+            font-size: 1.3em;
+            font-style: italic;
+            margin-top: 15px;
+            color: #C71585;
+            font-weight: bold;
+        }
+
+        /* --- Random Photo Placement (Absolute Positioning) --- */
+        .gallery-photo {
+            position: absolute;
+            width: 150px; /* Consistent size for gallery photos */
+            height: 150px;
+            object-fit: cover; 
+            border-radius: 10px;
+            border: 3px solid #48D1CC; 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+            z-index: 5; /* Below the main content */
+        }
+        
+        .gallery-photo:hover {
+            transform: scale(1.1) rotate(0deg); 
+            z-index: 20; /* Bring to front on hover */
+        }
+        
+        /* Specific Random Positions and Rotations for the 4 Photos */
+        #photo1 {
+            top: 50px;
+            left: 20px;
+            transform: rotate(-10deg);
+        }
+        #photo2 {
+            top: 200px;
+            right: 20px;
+            transform: rotate(15deg);
+        }
+        #photo3 {
+            bottom: 50px;
+            left: 50px;
+            transform: rotate(5deg);
+        }
+        #photo4 {
+            bottom: 20px;
+            right: 100px;
+            transform: rotate(-20deg);
+        }
+
+
+        /* --- Button back to the image selection --- */
+        #backButton {
+            margin-top: 30px;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            background-color: #90EE90;
+            color: #4B0082;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            z-index: 10;
+        }
+        #backButton:hover {
+            background-color: #7CFC00;
+        }
+        
+        /* --- Falling Heart Effect (CSS Animation) --- */
+        .heart {
+            position: absolute;
+            top: -10vh; 
+            color: #FF1493;
+            font-size: 2em;
+            pointer-events: none; 
+            animation: fall linear infinite;
+            z-index: 1; 
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <img id="photo1" class="gallery-photo" src="photo1.png" alt="Memory 1">
+    <img id="photo2" class="gallery-photo" src="photo2.png" alt="Memory 2">
+    <img id="photo3" class="gallery-photo" src="photo3.png" alt="Memory 3">
+    <img id="photo4" class="gallery-photo" src="photo4.png" alt="Memory 4">
+
+    <h1>📸 Bonus Surprise 2: Cherished Memories! 💖</h1>
+    
+    <div class="main-edit-container">
+        <video class="main-edit-video" autoplay loop muted playsinline>
+            <source src="main_edit.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <p class="main-edit-caption">
+            — A special video made just for you! —
+        </p>
+    </div>
+    
+    <button id="backButton" onclick="window.location.href='page4.html'">
+        Back to Bonus Surprises
+    </button>
+    
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '💖'; 
+            heart.style.left = Math.random() * 100 + 'vw'; 
+            heart.style.animationDuration = Math.random() * 3 + 4 + 's'; 
+            heart.style.opacity = Math.random() * 0.7 + 0.3; 
+            heart.style.fontSize = Math.random() * 1.5 + 1.5 + 'em'; 
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 7000); 
+        }
+        setInterval(createHeart, 400); 
+    </script>
+
+</body>
+</html>

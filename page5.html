@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonus Surprise 1: Open Your Letter! 💌</title>
+    <style>
+        /* --- General Styling and Background --- */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #FFC0CB; /* Soft Pink Background */
+            color: #4B0082; /* Deep Violet text */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+            overflow: hidden; /* Important for the falling heart animation */
+        }
+
+        h1 {
+            color: #FF69B4; /* Hot Pink */
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        /* --- THE LETTER BOX STYLING --- */
+        .letter-container {
+            width: 80%;
+            max-width: 500px;
+            margin: 20px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: all 0.5s ease-in-out;
+            border-radius: 10px;
+            z-index: 10;
+        }
+
+        /* The initial 'closed' state of the letter/book cover */
+        .closed-cover {
+            background-color: #FFD700; /* Gold color for the cover */
+            padding: 30px;
+            border-radius: 10px;
+            color: white;
+            font-size: 1.5em;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150px;
+            transition: opacity 0.3s;
+        }
+
+        .closed-cover:hover {
+            opacity: 0.8;
+        }
+
+        /* The scrollable content area, initially hidden */
+        .letter-content {
+            background-color: white;
+            color: #4B0082;
+            padding: 20px;
+            text-align: left;
+            overflow-y: hidden;
+            max-height: 0;
+            transition: max-height 1.5s ease-in-out;
+            border-radius: 0 0 10px 10px;
+            border: 1px solid #ddd;
+        }
+
+        /* --- STYLES WHEN THE LETTER IS OPENED (Added by JavaScript) --- */
+        .letter-content.open {
+            max-height: 600px; 
+            overflow-y: auto; 
+        }
+        
+        .letter-content p { 
+            font-size: 1.1em; 
+            line-height: 1.6;
+        }
+
+        /* Button back to the image selection */
+        #backButton {
+            margin-top: 30px;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            background-color: #90EE90;
+            color: #4B0082;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            z-index: 10;
+        }
+        #backButton:hover {
+            background-color: #7CFC00;
+        }
+
+        /* --- Falling Heart Effect (CSS Animation) --- */
+        .heart {
+            position: absolute;
+            top: -10vh; 
+            color: #FF1493; /* Deep Pink Hearts */
+            font-size: 2em;
+            pointer-events: none; 
+            animation: fall linear infinite;
+            z-index: 1; /* Keep hearts in the background */
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🐻 Click to Open Your Special Letter! 🐻</h1>
+    
+    <div class="letter-container" onclick="openLetter()">
+        <div class="closed-cover" id="cover">
+            Click Here to Reveal the Message! ✉️
+        </div>
+
+        <div class="letter-content" id="content">
+            <p style="font-style: italic;">December 30, 2025</p>
+            
+            <p>Dearest Penguin 🐧,</p>
+
+            <p>
+            I wanted this surprise to celebrate you, my incredible friend. Thank you for your unwavering support, your laughter, and the way you make every moment brighter. Our friendship is one of the most important things in my life, and I look forward to making many more amazing memories with you in the new year. You are truly special. 💖
+            </p>
+
+            <p>
+            This bonus section holds three different messages, so make sure to check out the other two links when you are done reading this! 🐻
+            </p>
+            
+            </div>
+    </div>
+    
+    <button id="backButton" onclick="window.location.href='page4.html'">
+        Back to Bonus Surprises
+    </button>
+    
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '💖'; 
+            heart.style.left = Math.random() * 100 + 'vw'; 
+            heart.style.animationDuration = Math.random() * 3 + 4 + 's'; 
+            heart.style.opacity = Math.random() * 0.7 + 0.3; 
+            heart.style.fontSize = Math.random() * 1.5 + 1.5 + 'em'; 
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 7000); 
+        }
+        setInterval(createHeart, 400); 
+        
+        // JavaScript function to handle the opening animation
+        function openLetter() {
+            const content = document.getElementById('content');
+            const cover = document.getElementById('cover');
+            
+            content.classList.toggle('open');
+            
+            if (content.classList.contains('open')) {
+                cover.style.display = 'none';
+            }
+        }
+    </script>
+
+</body>
+</html>

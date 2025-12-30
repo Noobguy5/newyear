@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAPPY NEW YEAR!!! 🎉</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000033; /* Very Dark Blue/Night Sky */
+            color: #FFD700; /* Gold text */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+            overflow: hidden; 
+        }
+
+        /* Video as Background */
+        #fireworksVideo {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%; 
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -100; 
+            filter: brightness(0.7); 
+        }
+
+        .content {
+            z-index: 10; 
+            padding: 30px 50px;
+            background-color: rgba(0, 0, 0, 0.7); 
+            border-radius: 15px;
+            border: 5px solid #FF4500; 
+            box-shadow: 0 0 30px rgba(255, 69, 0, 0.8); 
+        }
+
+        h1 {
+            font-size: 5em; 
+            text-shadow: 0 0 15px #FF4500; 
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 2em; 
+            margin-bottom: 40px; /* Increased margin to separate text and button */
+            color: #FFFACD; 
+        }
+        
+        /* --- NEW BUTTON STYLE --- */
+        #nextButton {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #000033;
+            background-color: #FFD700; /* Gold */
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 0 15px #FFD700;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        #nextButton:hover {
+            background-color: #FFFACD;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop id="fireworksVideo">
+        <source src="fireworks.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <div class="content">
+        <h1>HAPPY NEW YEAR! 🥳🎉</h1>
+        <p>You found the surprise! Thank you for being in my life and making every day special.</p>
+        
+        <button id="nextButton" onclick="window.location.href='page4.html'">
+            ...And here are 3 Bonus Surprises! 🎁
+        </button>
+    </div>
+
+</body>
+</html>
